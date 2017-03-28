@@ -13,11 +13,7 @@
 1.shell的函数定义及使用
 2.循环结构写法
 3.分支结构写法
-4.xargs和find使用
-
-函数定义与使用
-
-123456789101112131415161718192021#!/bin/bashfunction helloworld() &amp;#123;	echo &apos;hello world!&apos;;	#全部参数	echo $@	#第一个参数   	echo $1	#当前脚本名称">
+4.xargs和find使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第二周学习笔记">
 <meta property="og:url" content="http://yoursite.com/2017/03/19/第二周学习笔记/index.html">
@@ -27,12 +23,8 @@
 1.shell的函数定义及使用
 2.循环结构写法
 3.分支结构写法
-4.xargs和find使用
-
-函数定义与使用
-
-123456789101112131415161718192021#!/bin/bashfunction helloworld() &amp;#123;	echo &apos;hello world!&apos;;	#全部参数	echo $@	#第一个参数   	echo $1	#当前脚本名称">
-<meta property="og:updated_time" content="2017-03-28T14:34:51.000Z">
+4.xargs和find使用">
+<meta property="og:updated_time" content="2017-03-28T14:36:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第二周学习笔记">
 <meta name="twitter:description" content="知识点覆盖
@@ -40,11 +32,7 @@
 1.shell的函数定义及使用
 2.循环结构写法
 3.分支结构写法
-4.xargs和find使用
-
-函数定义与使用
-
-123456789101112131415161718192021#!/bin/bashfunction helloworld() &amp;#123;	echo &apos;hello world!&apos;;	#全部参数	echo $@	#第一个参数   	echo $1	#当前脚本名称">
+4.xargs和find使用">
   
     <link rel="alternative" href="/atom.xml" title="小咸鱼的故事" type="application/atom+xml">
   
@@ -189,7 +177,8 @@
 2.循环结构写法
 3.分支结构写法
 4.xargs和find使用
-</code></pre><blockquote>
+</code></pre><a id="more"></a>
+<blockquote>
 <p>函数定义与使用</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">helloworld</span></span>() &#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'hello world!'</span>;</div><div class="line">	<span class="comment">#全部参数</span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$@</span></div><div class="line">	<span class="comment">#第一个参数   </span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$1</span></div><div class="line">	<span class="comment">#当前脚本名称</span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$0</span></div><div class="line">	<span class="comment">#全部参数</span></div><div class="line">	<span class="built_in">echo</span> $*</div><div class="line">&#125;</div><div class="line"></div><div class="line">helloworld 12 34</div><div class="line"></div><div class="line">有几个和普通php脚本不同的地方需要注意：</div><div class="line">1.函数定义必须在执行脚本之前</div><div class="line">2.函数定义不需要参数列表</div><div class="line">3.函数调用不需要括号</div><div class="line">4.function关键字可有可无</div><div class="line">5.返回码必须是数字</div></pre></td></tr></table></figure>
