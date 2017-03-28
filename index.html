@@ -230,6 +230,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
+<p>知识点覆盖</p>
+</blockquote>
+<pre><code>1.文件处理命令：uniq、sort、comm等命令
+2.自动化交互处理命令：expect
+3.使用通配符对变量或文件进行解析截取
+4.创建测试数据：生成指定大小指定随机内容的测试数据
+</code></pre><blockquote>
 <p>sort命令的用法</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.生成随机数文件用于测试</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..100&#125; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$RANDOM</span> &gt;&gt; 123.txt <span class="keyword">done</span></div><div class="line"><span class="comment">#2.数字排序，注意默认的排序不是数字大小排序</span></div><div class="line">sort -n filename</div><div class="line"><span class="comment">#3.逆序排序</span></div><div class="line">sort -r filename</div><div class="line"><span class="comment">#4.指定列进行排序,指定第二列进行排序</span></div><div class="line"><span class="comment">#生成测试数据</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..100&#125; <span class="keyword">do</span></div><div class="line">    <span class="built_in">echo</span> <span class="variable">$i</span><span class="string">'      '</span><span class="variable">$RANDOM</span>&gt;&gt;123.txt;</div><div class="line"><span class="comment">#排序代码</span></div><div class="line">sort -nrk 2</div></pre></td></tr></table></figure>
@@ -333,6 +340,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
+<p>知识点覆盖</p>
+</blockquote>
+<pre><code>1.shell的函数定义及使用
+2.循环结构写法
+3.分支结构写法
+4.xargs和find使用
+</code></pre><blockquote>
 <p>函数定义与使用</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">helloworld</span></span>() &#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'hello world!'</span>;</div><div class="line">	<span class="comment">#全部参数</span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$@</span></div><div class="line">	<span class="comment">#第一个参数   </span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$1</span></div><div class="line">	<span class="comment">#当前脚本名称</span></div><div class="line">	<span class="built_in">echo</span> <span class="variable">$0</span></div><div class="line">	<span class="comment">#全部参数</span></div><div class="line">	<span class="built_in">echo</span> $*</div><div class="line">&#125;</div><div class="line"></div><div class="line">helloworld 12 34</div><div class="line"></div><div class="line">有几个和普通php脚本不同的地方需要注意：</div><div class="line">1.函数定义必须在执行脚本之前</div><div class="line">2.函数定义不需要参数列表</div><div class="line">3.函数调用不需要括号</div><div class="line">4.function关键字可有可无</div><div class="line">5.返回码必须是数字</div></pre></td></tr></table></figure>
@@ -441,58 +455,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>格式化输出</p>
+<p>知识点覆盖</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意：如果格式化使用了d那么后面一定要是整形数字，不然会报错</span></div><div class="line"><span class="comment">#d s f 这些和C相同，分别代表数据类型</span></div><div class="line"><span class="comment">#-5 -10 -4则代表对其，-表示左对齐</span></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5s %-10s %-4s\n"</span> No Name Mark</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.2f\n"</span> 1 pengshzihong 89.222</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.3f\n"</span> 1 pengshzihong 82.123</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.0f\n"</span> 1 pengshzihong 82.12</div><div class="line"></div><div class="line">以上代码输出：</div><div class="line">No    Name       Mark</div><div class="line">1     pengshzihong 89.22</div><div class="line">1     pengshzihong 82.123</div><div class="line">1     pengshzihong 82</div></pre></td></tr></table></figure>
-<blockquote>
-<p>获取进程ID</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pgrep  进程名称</div><div class="line">命令： pgrep php</div><div class="line">输出： 414</div></pre></td></tr></table></figure>
-<blockquote>
-<p>获取字符串长度的方法</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var=23618236187</div><div class="line">length=<span class="variable">$&#123;#var&#125;</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$length</span></div><div class="line">输出：11</div></pre></td></tr></table></figure>
-<blockquote>
-<p>获取用户UID</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#UID是一个环境变量，管理员是0</span></div><div class="line">uid=<span class="variable">$UID</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$uid</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>数学计算(整形运算)</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意，let的计算是不用加美元符号的，可以像其他编程语言一样计算</span></div><div class="line">a=1</div><div class="line">b=2</div><div class="line"><span class="built_in">let</span> result=a+b</div><div class="line"><span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"><span class="built_in">let</span> result++</div><div class="line"><span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"><span class="built_in">let</span> result+8</div><div class="line"><span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"><span class="built_in">let</span> result-3</div><div class="line"><span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"></div><div class="line"><span class="comment">#其他方法：(()) 这种一定要在变量前面加美元符号,括号前面也要</span></div><div class="line">result=$((<span class="variable">$a</span>+<span class="variable">$b</span>))</div><div class="line"><span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"></div><div class="line"><span class="comment">#其他方法：[] 数组符号，这个和let一样</span></div><div class="line">result=$[a+b];<span class="built_in">echo</span> <span class="variable">$result</span></div><div class="line"></div><div class="line"><span class="comment">#expr</span></div><div class="line">result=$(expr <span class="variable">$a</span> + <span class="variable">$b</span>);<span class="built_in">echo</span> <span class="variable">$result</span>;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>高级运算</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#使用管道输出表达式到bc</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"89.2 * 2882 "</span>| bc</div><div class="line"></div><div class="line"><span class="comment">#传递scale参数可以设置小数点后面的精确度</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"scale=1;3/8"</span> | bc</div><div class="line"></div><div class="line"><span class="comment">#进制转换</span></div><div class="line"><span class="comment">#十进制转化2进制</span></div><div class="line"><span class="built_in">test</span>=10</div><div class="line"><span class="built_in">echo</span> <span class="string">"obase=2;<span class="variable">$test</span>"</span> | bc</div><div class="line"><span class="comment">#二进制转换为10进制</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"obase=10;ibase=2;1010"</span> | bc</div><div class="line"></div><div class="line"><span class="comment">#计算平方和平方根</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"sqrt(100)"</span>| bc</div><div class="line"><span class="built_in">echo</span> <span class="string">"2^3"</span>| bc</div></pre></td></tr></table></figure>
-<blockquote>
-<p>几种重定向文件描述符写法解析</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#把正确错误信息都写入/tmp/test</span></div><div class="line">ls + &amp;&gt; /tmp/<span class="built_in">test</span></div><div class="line"></div><div class="line"><span class="comment">#把错误信息写入test</span></div><div class="line">ls + 2&gt;/tmp/<span class="built_in">test</span></div><div class="line"></div><div class="line"><span class="comment">#tee把标准输入写入文件同时作为标准输出传递给下一个命令</span></div><div class="line"><span class="comment">#注意tee只会读取标准输入的信息，所以第二个命令执行时没有数据的</span></div><div class="line">ls | tee /tmp/<span class="built_in">test</span> | wc <span class="_">-l</span></div><div class="line">ls +| tee /tmp/<span class="built_in">test</span> | wc <span class="_">-l</span></div><div class="line"></div><div class="line"><span class="comment">#把EOF的多行文本做为输入写入文件</span></div><div class="line">cat &lt;&lt; EOF &gt;&gt; /tmp/<span class="built_in">test</span></div><div class="line">testeof</div></pre></td></tr></table></figure>
-<blockquote>
-<p>自定义文件描述符</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意&amp;号一定要有</span></div><div class="line"><span class="comment">#而且只读文件描述符只能使用一次！</span></div><div class="line"><span class="built_in">exec</span> 3 &lt; /tmp/<span class="built_in">test</span></div><div class="line">cat &lt;&amp;3;</div><div class="line"><span class="comment">#截断模式的话，会一直从当前的位置向后覆盖</span></div><div class="line"><span class="built_in">exec</span> 5&gt;/tmp/<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'test'</span> &gt;&amp;5</div><div class="line"><span class="comment">#直接追加</span></div><div class="line"><span class="built_in">exec</span> 6&gt;&gt;/tmp/<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'test'</span> &gt;&amp;6</div><div class="line"></div><div class="line">注意：如果同时存在截断和追加的文件描述符，截断模式</div><div class="line">写入的数据会从截断的位置开始一行一行的覆盖掉后面其</div><div class="line">他描述符加入的数据</div></pre></td></tr></table></figure>
-<blockquote>
-<p>简单数组定义</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#数组定义</span></div><div class="line">方法一：  array=(1 2 3 4 5 6)</div><div class="line">方法二： 注意，直接赋值的方法索引必须是数字！！！</div><div class="line">array[1]=4</div><div class="line">array=[2]=5;</div><div class="line"></div><div class="line"><span class="comment">#打印全部数组</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$array</span>[*] 或者是 <span class="built_in">echo</span> <span class="variable">$array</span>[@]</div><div class="line"></div><div class="line"><span class="comment">#打印数组长度</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#array[*]&#125;</span> 或者<span class="built_in">echo</span> <span class="variable">$&#123;#array[*]&#125;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>关联数组</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#关联数组声明首先是需要显式的定义</span></div><div class="line"><span class="built_in">declare</span> -A guanlian</div><div class="line"><span class="comment">#给关联数组赋值可以像普通数组那样单个赋值，批量赋值如下</span></div><div class="line">guanlian=([apple]=<span class="string">'5'</span> [orange]=<span class="string">'6'</span>)  <span class="comment">#mac下实验暂时不成功</span></div><div class="line"><span class="comment">#单个赋值不需要双引号</span></div><div class="line">guanlian[key]=value</div><div class="line"><span class="comment">#其他获取长度和值和普通一样</span></div><div class="line"><span class="comment">#获取所有键的方法</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!guanlian[*]&#125;</span>  <span class="comment">#mac下暂不成功</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>别名设置</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">建立别名：<span class="built_in">alias</span> new_cmd=<span class="string">'ls -l'</span></div><div class="line">解除别名：<span class="built_in">unalias</span> new_cmd</div><div class="line">重复创建新的别名会取代旧的</div><div class="line">为了防止使用别名中使用了已经定义的别名可以在cmd中加上\来强行运行原来的命令</div></pre></td></tr></table></figure>
-<blockquote>
-<p>控制终端显示输入</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stty -echo;<span class="built_in">read</span>  让输入不在终端显示</div><div class="line">stty <span class="built_in">echo</span>; <span class="built_in">read</span>  输入会在终端显示</div></pre></td></tr></table></figure>
-<blockquote>
-<p>调试脚本</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#启动方式：</span></div><div class="line">bash -x script_name</div><div class="line">在<span class="built_in">set</span> -x和<span class="built_in">set</span> +x 直接的东西会处于调试模式，详情见debug.sh</div><div class="line">另外直接把脚本的</div><div class="line">!<span class="comment">#/bin/bash改为 !#/bin/bash -xv</span></div><div class="line">也会直接进入调试模式，详情见debug.sh</div></pre></td></tr></table></figure>
-
+<pre><code>1.字符串常用操作
+2.shell数学运算
+3.文件描述符与重定向运用
+4.简单数组和关联数组运用
+5.shell脚本调试方法
+</code></pre>
+        
+          <a class="article-more-a" href="/2017/03/12/第一周学习笔记/#more">more >></a>
+        
       
 
       

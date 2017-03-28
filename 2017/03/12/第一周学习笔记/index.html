@@ -8,22 +8,34 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>第一周学习笔记 | 小咸鱼的故事</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="格式化输出
+  <meta name="description" content="知识点覆盖
 
-1234567891011121314#注意：如果格式化使用了d那么后面一定要是整形数字，不然会报错#d s f 这些和C相同，分别代表数据类型#-5 -10 -4则代表对其，-表示左对齐#!/bin/bashprintf &quot;%-5s %-10s %-4s\n&quot; No Name Markprintf &quot;%-5d %-10s %-4.2f\n&quot; 1 pengshzihong 89.2">
+1.字符串常用操作
+2.shell数学运算
+3.文件描述符与重定向运用
+4.简单数组和关联数组运用
+5.shell脚本调试方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一周学习笔记">
 <meta property="og:url" content="http://yoursite.com/2017/03/12/第一周学习笔记/index.html">
 <meta property="og:site_name" content="小咸鱼的故事">
-<meta property="og:description" content="格式化输出
+<meta property="og:description" content="知识点覆盖
 
-1234567891011121314#注意：如果格式化使用了d那么后面一定要是整形数字，不然会报错#d s f 这些和C相同，分别代表数据类型#-5 -10 -4则代表对其，-表示左对齐#!/bin/bashprintf &quot;%-5s %-10s %-4s\n&quot; No Name Markprintf &quot;%-5d %-10s %-4.2f\n&quot; 1 pengshzihong 89.2">
-<meta property="og:updated_time" content="2017-03-28T14:11:46.000Z">
+1.字符串常用操作
+2.shell数学运算
+3.文件描述符与重定向运用
+4.简单数组和关联数组运用
+5.shell脚本调试方法">
+<meta property="og:updated_time" content="2017-03-28T14:32:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一周学习笔记">
-<meta name="twitter:description" content="格式化输出
+<meta name="twitter:description" content="知识点覆盖
 
-1234567891011121314#注意：如果格式化使用了d那么后面一定要是整形数字，不然会报错#d s f 这些和C相同，分别代表数据类型#-5 -10 -4则代表对其，-表示左对齐#!/bin/bashprintf &quot;%-5s %-10s %-4s\n&quot; No Name Markprintf &quot;%-5d %-10s %-4.2f\n&quot; 1 pengshzihong 89.2">
+1.字符串常用操作
+2.shell数学运算
+3.文件描述符与重定向运用
+4.简单数组和关联数组运用
+5.shell脚本调试方法">
   
     <link rel="alternative" href="/atom.xml" title="小咸鱼的故事" type="application/atom+xml">
   
@@ -162,6 +174,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
+<p>知识点覆盖</p>
+</blockquote>
+<pre><code>1.字符串常用操作
+2.shell数学运算
+3.文件描述符与重定向运用
+4.简单数组和关联数组运用
+5.shell脚本调试方法
+</code></pre><a id="more"></a>
+<blockquote>
 <p>格式化输出</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意：如果格式化使用了d那么后面一定要是整形数字，不然会报错</span></div><div class="line"><span class="comment">#d s f 这些和C相同，分别代表数据类型</span></div><div class="line"><span class="comment">#-5 -10 -4则代表对其，-表示左对齐</span></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5s %-10s %-4s\n"</span> No Name Mark</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.2f\n"</span> 1 pengshzihong 89.222</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.3f\n"</span> 1 pengshzihong 82.123</div><div class="line"><span class="built_in">printf</span> <span class="string">"%-5d %-10s %-4.0f\n"</span> 1 pengshzihong 82.12</div><div class="line"></div><div class="line">以上代码输出：</div><div class="line">No    Name       Mark</div><div class="line">1     pengshzihong 89.22</div><div class="line">1     pengshzihong 82.123</div><div class="line">1     pengshzihong 82</div></pre></td></tr></table></figure>
