@@ -133,6 +133,137 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-《redis设计与实现》第一周学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/14/《redis设计与实现》第一周学习笔记/">《redis设计与实现》第一周学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/14/《redis设计与实现》第一周学习笔记/" class="archive-article-date">
+  	<time datetime="2017-05-14T09:10:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.redis字符串实现</div><div class="line">2.redis链表实现</div><div class="line">3.redis字典实现</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/05/14/《redis设计与实现》第一周学习笔记/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis设计与实现</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/redis设计与实现/" class="article-tag-list-link color1">redis设计与实现</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/14/《redis设计与实现》第一周学习笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-第七周学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/23/第七周学习笔记/">第七周学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/23/第七周学习笔记/" class="archive-article-date">
+  	<time datetime="2017-04-23T12:42:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="下载工具wget"><a href="#下载工具wget" class="headerlink" title="下载工具wget"></a>下载工具wget</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.限制下载速度</span></div><div class="line">wget --limit-rate 20k http://www.baidu.com</div><div class="line"><span class="comment">#2.对下载容量进行限制</span></div><div class="line">wget -Q 1k http://www.baidu.com</div><div class="line"><span class="comment">#3.镜像网站，很多网站已经屏蔽掉wget了</span></div><div class="line">wget -r --mirror url</div></pre></td></tr></table></figure>
+<p>######lynx格式化打印文本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这个工具会把&lt;a href&gt;用文本方式打印出来</span></div><div class="line">lynx -dump http://baidu.com</div></pre></td></tr></table></figure>
+<p>######curl</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.静默下载不显示进度信息</span></div><div class="line">curl url --silent</div><div class="line"><span class="comment">#2.设置refer</span></div><div class="line">curl --referer 37.com  http://baidu.com</div><div class="line"><span class="comment">#3.设置cookie</span></div><div class="line">curl 37.com --cookie <span class="string">"user=dadjak"</span></div><div class="line"><span class="comment">#3.另存cookie文件</span></div><div class="line">curl -c cookie.txt http://www.baidu.com</div><div class="line"><span class="comment">#4.查看头部信息</span></div><div class="line">curl -I baidu.com</div><div class="line"><span class="comment">#5.curl模拟post请求,wget参数形式一样不过使用的是-post-data</span></div><div class="line">curl <span class="_">-d</span> <span class="string">"name=name&amp;pass=pash"</span></div></pre></td></tr></table></figure>
+<h6 id="tar文本归档"><a href="#tar文本归档" class="headerlink" title="tar文本归档"></a>tar文本归档</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.批量归档,-c表示创建，f表示文件列表，source可以用通配符</span></div><div class="line">tar -cf target_name [<span class="built_in">source</span>]</div><div class="line"><span class="comment">#2.向已经压缩的文件追加文字</span></div><div class="line">tar -rvf original_name file</div><div class="line"><span class="comment">#3.列出已经压缩的文件列表</span></div><div class="line">tar -tf file</div><div class="line"><span class="comment">#4.查看更详细的文件列表信息</span></div><div class="line">tar -tvvf file</div><div class="line"><span class="comment">#5.提取文件内容, x表示提取，-C表示解压缩地址</span></div><div class="line">tar -xf file -C target</div><div class="line"><span class="comment">#6.获取文件的指定内容,下面只提取file1和file2</span></div><div class="line">tar -xvf file file1 file2</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/23/第七周学习笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-第六周学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -687,6 +818,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis设计与实现</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">shell脚本攻略读书笔记</a>

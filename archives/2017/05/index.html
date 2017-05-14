@@ -6,30 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>第五周学习笔记 | 小咸鱼的故事</title>
+  <title>Archives: 2017/5 | 小咸鱼的故事</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）
-grep
-awk
-sed
-cut">
-<meta property="og:type" content="article">
-<meta property="og:title" content="第五周学习笔记">
-<meta property="og:url" content="http://yoursite.com/2017/04/09/第五周学习笔记/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="小咸鱼的故事">
+<meta property="og:url" content="http://yoursite.com/archives/2017/05/index.html">
 <meta property="og:site_name" content="小咸鱼的故事">
-<meta property="og:description" content="学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）
-grep
-awk
-sed
-cut">
-<meta property="og:updated_time" content="2017-04-09T14:18:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第五周学习笔记">
-<meta name="twitter:description" content="学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）
-grep
-awk
-sed
-cut">
+<meta name="twitter:title" content="小咸鱼的故事">
   
     <link rel="alternative" href="/atom.xml" title="小咸鱼的故事" type="application/atom+xml">
   
@@ -147,179 +131,71 @@ cut">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-第五周学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      第五周学习笔记
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/05/14/《redis设计与实现》第一周学习笔记/" class="archive-article-date">
+  	<time datetime="2017-05-14T09:10:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/05/14/《redis设计与实现》第一周学习笔记/">《redis设计与实现》第一周学习笔记</a>
     </h1>
   
 
-        
-        <a href="/2017/04/09/第五周学习笔记/" class="archive-article-date">
-  	<time datetime="2017-04-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h6 id="学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）"><a href="#学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）" class="headerlink" title="学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）"></a>学习笔记覆盖内容（因大部分接触过，所以只记录补充的部分）</h6><ul>
-<li>grep</li>
-<li>awk</li>
-<li>sed</li>
-<li>cut<a id="more"></a>
-<h6 id="一些常用的grep参数"><a href="#一些常用的grep参数" class="headerlink" title="一些常用的grep参数"></a>一些常用的grep参数</h6></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#默认的grep匹配表达式使用的是通配符，如果需要使用普通的正则表达式，要使用如下命令</span></div><div class="line">grep -E <span class="string">'表达式内容'</span> filename</div><div class="line">egrep <span class="string">'表达式内容'</span> filename</div><div class="line"><span class="comment">#加上color参数可以指定匹配出的颜色</span></div><div class="line">grep apple test.txt --color=auto</div><div class="line"><span class="comment">#打印除了匹配行之外的所有行</span></div><div class="line">grep -v</div><div class="line"><span class="comment">#打印匹配成功的行数，注意是行数，不是次数</span></div><div class="line">grep -c</div><div class="line"><span class="comment">#找出存在匹配性的文件名</span></div><div class="line">grep <span class="_">-l</span> apple test.txt <span class="built_in">test</span>2.txt</div><div class="line"><span class="comment">#找出不存在匹配性的文件名</span></div><div class="line">grep -L apple test.txt <span class="built_in">test</span>2.txt</div><div class="line"><span class="comment">#找出匹配项所在的文件和行数</span></div><div class="line">grep -n apple  <span class="built_in">test</span>*</div><div class="line"><span class="comment">#输出：</span></div><div class="line">test.txt:4:apple</div><div class="line"><span class="built_in">test</span>2.txt:1:apple\nbannn\nndsada</div><div class="line"><span class="comment">#递归的寻找某个目录中文件所含内容，可以拿来寻找代码</span></div><div class="line">grep <span class="string">'controller'</span> . -R -n</div></pre></td></tr></table></figure>
-<h6 id="一些有用的cut指令说明"><a href="#一些有用的cut指令说明" class="headerlink" title="一些有用的cut指令说明"></a>一些有用的cut指令说明</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#cut的一般分割用awk可以更好的掌握，这里记录一些我不知道的用法</span></div><div class="line"><span class="comment">#1.打印指定序列的长度,下方表示打印出1到5个字符和第7到第10个字符</span></div><div class="line">cut -c1-5,7-10 <span class="built_in">test</span></div></pre></td></tr></table></figure>
-<h6 id="sed简单说明"><a href="#sed简单说明" class="headerlink" title="sed简单说明"></a>sed简单说明</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">格式： sed <span class="string">'s/匹配的表达式/替换的表达式/'</span> filename</div><div class="line"><span class="comment">#一个简单的示例，把apple替换成orange</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'apple banna apple'</span> | sed <span class="string">'s/apple/orange/'</span></div><div class="line"><span class="comment">#输出如下，可以发现只替换了第一个apple</span></div><div class="line">orange banna apple</div><div class="line"><span class="comment">#最后加上g就能替换全部的apple</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'apple banna apple'</span> | sed <span class="string">'s/apple/orange/g'</span></div><div class="line"><span class="comment">#移除匹配的行，注意表达式前面的s需要去掉</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'apple banna apple'</span> | sed <span class="string">'/apple/d'</span></div><div class="line"><span class="comment">#用&amp;表示匹配到的单词，输出用中括号包裹的apple</span></div><div class="line"><span class="comment">#注意！！！！sed的大括号是需要转义的</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'apple banna apple'</span> | sed <span class="string">'s/apple/[&amp;]/g'</span></div><div class="line">输出：[apple] banna [apple]</div><div class="line"><span class="comment">#匹配部分的子字符串，比如下面匹配了apple之后把apple替换为括号中的app，第一个括号是\1，第二个是\2</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'apple banna apple'</span> | sed <span class="string">'s/\(app\)le/\1/g'</span></div><div class="line">输出：app banna app</div></pre></td></tr></table></figure>
-<h6 id="awk的知识补充"><a href="#awk的知识补充" class="headerlink" title="awk的知识补充"></a>awk的知识补充</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#把外部变量传递到awk内部</span></div><div class="line">var1=110</div><div class="line">var2=220</div><div class="line"><span class="built_in">echo</span> | awk <span class="string">'&#123;print var1,var2&#125;'</span> var1=<span class="variable">$var1</span> var2=<span class="variable">$var2</span></div><div class="line"><span class="comment">#输出如下，注意print是使用逗号分隔的，然而打印的时候是空格分隔，赋值语句放在begin &#123;&#125; end的后面</span></div><div class="line">110 220</div><div class="line"></div><div class="line"><span class="comment">#awk的2个内置变量</span></div><div class="line"><span class="comment">#NR 表示行号</span></div><div class="line"><span class="comment">#NF 表示字段数,空格分隔</span></div><div class="line">cat <span class="built_in">test</span> | awk <span class="string">'&#123;print NR,NF&#125;'</span></div><div class="line"></div><div class="line"><span class="comment">#把外部命令使用awk执行，下面的例子把命令给了cmd这个变量，然后用print执行</span></div><div class="line"><span class="built_in">echo</span> | awk <span class="string">'&#123;"grep root /etc/passwd" | getline cmd;print cmd&#125;'</span></div></pre></td></tr></table></figure>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">shell脚本攻略读书笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis设计与实现</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/shell脚本攻略读书笔记/" class="article-tag-list-link color4">shell脚本攻略读书笔记</a>
+        			<a href="/categories/redis设计与实现/" class="article-tag-list-link color1">redis设计与实现</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/09/第五周学习笔记/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/04/10/第六周学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          第六周学习笔记
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/03/28/第四周学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">第四周学习笔记</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -342,8 +218,8 @@ cut">
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
