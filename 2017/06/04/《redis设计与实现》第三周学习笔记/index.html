@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>《redis设计与实现》第二周学习笔记 | 小咸鱼的故事</title>
+  <title>《redis设计与实现》第三周学习笔记 | 小咸鱼的故事</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1231.redis整数集合实现2.redis压缩列表实现3.redis对象及转化（上）">
+  <meta name="description" content="1231.redis内部数据存储结构2.redis持久化-RDB原理及文件结构3.redis持久化-AOF原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《redis设计与实现》第二周学习笔记">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/《redis设计与实现》第二周学习笔记/index.html">
+<meta property="og:title" content="《redis设计与实现》第三周学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/06/04/《redis设计与实现》第三周学习笔记/index.html">
 <meta property="og:site_name" content="小咸鱼的故事">
-<meta property="og:description" content="1231.redis整数集合实现2.redis压缩列表实现3.redis对象及转化（上）">
-<meta property="og:updated_time" content="2017-05-21T12:28:56.000Z">
+<meta property="og:description" content="1231.redis内部数据存储结构2.redis持久化-RDB原理及文件结构3.redis持久化-AOF原理">
+<meta property="og:updated_time" content="2017-06-04T14:17:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《redis设计与实现》第二周学习笔记">
-<meta name="twitter:description" content="1231.redis整数集合实现2.redis压缩列表实现3.redis对象及转化（上）">
+<meta name="twitter:title" content="《redis设计与实现》第三周学习笔记">
+<meta name="twitter:description" content="1231.redis内部数据存储结构2.redis持久化-RDB原理及文件结构3.redis持久化-AOF原理">
   
     <link rel="alternative" href="/atom.xml" title="小咸鱼的故事" type="application/atom+xml">
   
@@ -135,72 +135,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-《redis设计与实现》第二周学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-《redis设计与实现》第三周学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      《redis设计与实现》第二周学习笔记
+      《redis设计与实现》第三周学习笔记
     </h1>
   
 
         
-        <a href="/2017/05/21/《redis设计与实现》第二周学习笔记/" class="archive-article-date">
-  	<time datetime="2017-05-21T02:24:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-21</time>
+        <a href="/2017/06/04/《redis设计与实现》第三周学习笔记/" class="archive-article-date">
+  	<time datetime="2017-06-04T11:45:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.redis整数集合实现</div><div class="line">2.redis压缩列表实现</div><div class="line">3.redis对象及转化（上）</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.redis内部数据存储结构</div><div class="line">2.redis持久化-RDB原理及文件结构</div><div class="line">3.redis持久化-AOF原理</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h5 id="整数集合"><a href="#整数集合" class="headerlink" title="整数集合"></a>整数集合</h5><blockquote>
-<p>集合结构</p>
-</blockquote>
-<ul>
-<li>如果一个集合数量不多，并且只包含整数时，就会使用整数集合结构</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> intset &#123;</div><div class="line">    <span class="comment">//编码方式</span></div><div class="line">    <span class="keyword">uint32_t</span> encoding;</div><div class="line">    <span class="comment">//长度</span></div><div class="line">    <span class="keyword">uint32_t</span> length;</div><div class="line">    <span class="comment">//保存元素的数组，这个数组元素的格式不是int8_t，实际上是又上面的编码方式字段决定的</span></div><div class="line">    <span class="keyword">int8_t</span> contents[];</div><div class="line">&#125;intset;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>集合升级</p>
+<p>redis对象共享</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1.为什么要升级</div><div class="line">因为集合中所有的元素使用的大小都是一样的，因此一旦加入新元素超过了原来单位的长度就需要先升级再插入</div><div class="line"></div><div class="line">2.升级的步骤</div><div class="line">a.为新的数组分配需要的空间</div><div class="line">b.因为内存位的宽度变了，所以要把数据放到正确的位上</div><div class="line">c.插入新元素改变length，因为新元素可能是负数所以可能会插在表头</div><div class="line"></div><div class="line">3.如果插入元素触发了升级的话那么时间复杂度是O（N）</div><div class="line"></div><div class="line">4.一旦升级完成，则永远不会降级</div><div class="line"></div><div class="line">5.升级的好处是提高了灵活性，可以节约内存</div></pre></td></tr></table></figure>
-<h5 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h5><blockquote>
-<p>压缩列表的用途</p>
-</blockquote>
-<p>列表key和哈希key含有少量项并且都是整数或者短字符串时使用压缩列表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>redis内部有一个引用计数的辣鸡回收机制</div><div class="line"><span class="number">2.</span>redis对于整数字符串是采用对象共享的方式进行存储的，也就是整数新增对象是直接新增引用计数</div><div class="line"><span class="number">3.</span>因为字符串和其他对象过于复杂目前redis只支持整数的共享</div></pre></td></tr></table></figure>
 <blockquote>
-<p>压缩列表的结构</p>
+<p>redis键空转时长</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//链表结构</span></div><div class="line">zlbytes:链表使用的字节长度</div><div class="line">zltail:链表尾节点</div><div class="line">zllen:节点数量，小于<span class="number">65535</span>时表示节点数量，等于时需要遍历</div><div class="line">entry1:列表节点<span class="number">1</span></div><div class="line">entry2:列表节点<span class="number">2</span></div><div class="line">...</div><div class="line">zlend:标记列表末端</div><div class="line"></div><div class="line"><span class="comment">//链表节点结构</span></div><div class="line">previous_entry_length:前一个节点的长度 <span class="comment">//用于倒序遍历前面的节点</span></div><div class="line">encoding:本单位  <span class="comment">//记录了content的长度</span></div><div class="line">content:内容</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>redis对象维护着一个lru的值，表示距离上次访问过去了多久</div><div class="line"><span class="number">2.</span>通过命令 object idletime keyname 可以访问</div><div class="line"><span class="number">3.</span>当设定LRU相关的回收策略时，如果内存超过maxmemory的配置则会优先删除这些lru高的key</div></pre></td></tr></table></figure>
 <blockquote>
-<p>连锁更新</p>
+<p>redis数据库构成</p>
 </blockquote>
-<p>因为节点中存在一个字段是保存的是前一个节点的长度，所以如果插入的新节点大小大于254且之前的连续节点都是小于254的话就会触发连锁更新，所有节点的previous_entry_length都要替换<br>连锁更新最坏的情况算法复杂度是O(N*N)</p>
-<h5 id="redis对象（上）"><a href="#redis对象（上）" class="headerlink" title="redis对象（上）"></a>redis对象（上）</h5><blockquote>
-<p>对象简介</p>
-</blockquote>
-<p>每个redis的键值对都由两个对象组成，key一定是字符串，值则由redis自己判断最适合的数据结构并且会互相转换</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对象结构</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> redisObject &#123;</div><div class="line">    <span class="comment">//字符串、哈希等等五个对象中的一个</span></div><div class="line">    <span class="keyword">unsigned</span> type;</div><div class="line">    <span class="comment">//具体的数据结构类型，通常上面一个对象类型对应至少2种编码类型可以转换</span></div><div class="line">    <span class="keyword">unsigned</span> encoding;</div><div class="line">    <span class="comment">//指向底层的数据结构</span></div><div class="line">    <span class="keyword">void</span> *ptr;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>redis内部分为多个数据库，默认为<span class="number">16</span>个，并且每个数据库之间的数据是不共享的</div><div class="line"><span class="number">2.</span>一个数据库主要有dict和expires两个键空间，其中dict保存的是数据，expires保存的是过期时间</div><div class="line"><span class="number">3.</span>redis删除键的策略是惰性删除+定期删除策略的方式进行，惰性删除指的是直到下次操作这个键的时候才来删除，而定期删除则是分多次分不同时间频率来进行循环删除</div><div class="line"><span class="number">4.</span>从服务器中的过期键永远不会删除，除非主服务器同步了del命令过来</div></pre></td></tr></table></figure>
 <blockquote>
-<p>字符串对象的转化</p>
+<p>rdb持久化</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.如果一个字符串可以用整数表示，并且可以用long类型，则字符串的编码类型会被设置为int</div><div class="line">2.如果字符串是一个字符串并且大于32字节，那么会使用SDS，也就是编码对象会被设置为raw</div><div class="line">3.小于等于32字节的字符串会使用embstr对象，与SDS不同的是，SDS对象会两次申请内存，也就是第一次建立redisObject,第二次建立SDS，然而embstr是一次分配连续空间直接建立redisobject和embstr</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.rdb持久化可以使用save和bgsave，区别是前者会阻塞</div><div class="line">2.如果开启了AOF持久化，那么优先使用AOF进行恢复</div><div class="line">3.RDB是一个二进制文件，又多个部分组成，永远不会缺少的是'redis'，版本号，EOF，校验和</div><div class="line">4.RDB中所有键值对的保存都是长度+值的形式，只是每种类型的键值对最前面的宏定义数字不一样而已</div></pre></td></tr></table></figure>
 <blockquote>
-<p>链表对象转化</p>
+<p>AOF持久化</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">当列表同时满足以下两个条件时，使用ziplist（压缩列表）</div><div class="line">1.所有元素小于64字节</div><div class="line">2.保存的数量小于512个</div><div class="line">任何一个不满足都会变成linkedlist</div></pre></td></tr></table></figure>
-<blockquote>
-<p>哈希对象转化</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">当哈希表同时满足以下两个条件时，使用ziplist（压缩列表）</div><div class="line">1.所有元素小于64字节</div><div class="line">2.保存的数量小于512个</div><div class="line">任何一个不满足都会变成hashtable</div></pre></td></tr></table></figure>
-<blockquote>
-<p>集合对象转化</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">当集合同时满足以下两个条件时，使用intset</div><div class="line">1.所有元素小于64字节</div><div class="line">2.保存的数量小于512个</div><div class="line">任何一个不满足都会变成hashtable</div><div class="line">如果是集合形式的哈希表，那么key保存的就是集合的值，value则是null</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>AOF文件中保存的是一条条的redis命令</div><div class="line"><span class="number">2.</span>追加的命令并不是直接写到文件，会先写到AOF缓冲区中，之后根据配置会有三种策略同步到文件中</div><div class="line"><span class="number">3.</span>三种策略分别是每次有新命令都进行写入和同步，隔一秒钟进行同步，由操作系统控制同步，因为即使写入文件的时候操作系统也会先把文件写入到内存缓冲区中，除非强制执行，所以同步和写入的区别是前者写入文件，后者写入缓冲区</div><div class="line"><span class="number">4.</span>因为AOF是把所有命令保存起来所以文件会越来越大，因此需要一个重写机制，AOF重写其实就是遍历整个数据库，形成回复这个数据库的一条条插入命令，然后原子性的覆盖旧的AOF文件</div><div class="line"><span class="number">5.</span>关于重写的时候有可能出现的脏数据问题，redis提供了一个重写AOF缓冲区，当开始重写后redis除了要向AOF缓冲区写入命令外，还会向AOF缓冲区继续写入命令，然后在扫描整个数据库之后，最后通过信号的方式通知redis，写入重写AOF缓冲区的内容，完成重写</div></pre></td></tr></table></figure>
 
       
 
@@ -230,29 +206,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis设计与实现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/redis设计与实现/" class="article-tag-list-link color1">redis设计与实现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -302,7 +256,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/21/《redis设计与实现》第二周学习笔记/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/04/《redis设计与实现》第三周学习笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +270,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/04/《redis设计与实现》第三周学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          《redis设计与实现》第三周学习笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/14/《redis设计与实现》第一周学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">《redis设计与实现》第一周学习笔记</div>
+    <a href="/2017/05/21/《redis设计与实现》第二周学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《redis设计与实现》第二周学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
